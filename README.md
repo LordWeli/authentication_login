@@ -12,6 +12,7 @@ Content Index
 
 ## <a name="about"></a>About
   System to perform user authentication with username and password.
+
 ## <a name="how-to-use"></a>How To Use
   -  Clone the project
   -  Run the bundle install
@@ -34,5 +35,6 @@ Content Index
 
 ## <a name="technology"></a>Technology
   Using Ruby, Ruby On Rails, Bootstrap and the Bcrypt gem.
-## <a name="license"></a>License
 
+## <a name="license"></a>License
+  Authentication Login is released under the [MIT License](https://opensource.org/licenses/MIT).
