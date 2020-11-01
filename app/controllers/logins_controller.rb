@@ -10,7 +10,7 @@ class LoginsController < AuthenticationsController
       if @login.save
         session[:user] = @user
         flash[:notice] = 'Login feito com sucesso!'
-        redirect_to root_path
+        redirect_to home_index_path
       else
         flash[:error] = 'Nome de usuário ou senha está errado!'
         redirect_to root_path

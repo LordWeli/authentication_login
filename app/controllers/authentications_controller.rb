@@ -1,4 +1,9 @@
 class AuthenticationsController < ApplicationController
+  # attr_accessor: login
+  # def initialize
+    # @login = login?
+  # end
+
   def auth?
     @user = User.all.select do |user|
       user.username == params[:username]
@@ -12,4 +17,12 @@ class AuthenticationsController < ApplicationController
       return false
     end
   end
+
+  # def login?
+  #   unless session[:user].nil?
+  #     return true
+  #   else
+  #     return false
+  #   end
+  # end
 end

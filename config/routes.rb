@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   
   resources :logins, only: %i[new create]
   resources :authentications, only: %i[new create]
+  resources :home, only: %i[index]
 end
