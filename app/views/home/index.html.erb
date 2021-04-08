@@ -1,0 +1,6 @@
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+    <%= render 'shared/flash' %>
+  </div>
+  <%= link_to "Logout", login_path(session[:user_id]), method: 'DELETE', class: 'btn btn-danger float-right' %>
+</div>
