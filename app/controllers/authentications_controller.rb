@@ -1,28 +1,13 @@
 class AuthenticationsController < ApplicationController
-  # attr_accessor: login
-  # def initialize
-    # @login = login?
-  # end
-
   def auth?
-    @user = User.all.select do |user|
-      user.username == params[:username]
-    end
+    @user = User.find_by(username: params[:username])
 
     return false if @user.blank?
 
-    if BCrypt::Password.new(@user.first.password) == params[:password]
-      return true
-    else
-      return false
-    end
+    return BCrypt::Password.new(@user.password) == params[:password] ? true : false
   end
 
-  # def login?
-  #   unless session[:user].nil?
-  #     return true
-  #   else
-  #     return false
-  #   end
-  # end
+  def logged?
+    return Login.find_by(user_id: @user_id).nil? ? true : false
+  end
 end

@@ -5,26 +5,32 @@ class LoginsController < AuthenticationsController
 
   def create
     if auth?
-      @login = Login.new(user_id: @user.first.id)
-
-      if @login.save
-        session[:user_id] = @user.first.id
-        flash[:notice] = 'Login feito com sucesso!'
-        redirect_to home_index_path
+      if logged?
+        session[:user_id] = @user.id
+        flash[:notice] = helpers.login_check[:success][:message]
+        redirect_to helpers.login_check[:success][:path]
       else
-        flash[:error] = 'Nome de usuário ou senha está errado!'
-        redirect_to root_path
+        @login = Login.new(user_id: @user.id)
+
+        if @login.save
+          session[:user_id] = @user.id
+          flash[:notice] = helpers.login_check[:success][:message]
+          redirect_to helpers.login_check[:success][:path]
+        else
+          flash[:error] = helpers.login_check[:errors][:message]
+          redirect_to helpers.login_check[:errors][:path]
+        end
       end
     else
-      flash[:error] = 'Nome de usuário ou senha está errado!'
-      redirect_to root_path
+      flash[:error] = helpers.login_check[:errors][:message]
+      redirect_to helpers.login_check[:errors][:path]
     end
   end
 
   def destroy
     @login = Login.find_by(user_id: params[:id])
 
-    if @login.destroy
+    if @login.nil? || @login.destroy
       flash[:notice] = 'Saida dos sistema realizada com sucesso!'
       redirect_to root_path
     else
